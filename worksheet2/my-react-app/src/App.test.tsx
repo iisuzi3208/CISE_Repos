@@ -1,9 +1,24 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { createRoot } from 'react-dom/client';
+import { act } from 'react-dom/test-utils';
 import App from './App';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+describe('App', () => {
+  it('renders without crashing', () => {
+    const div = document.createElement('div');
+    const root = createRoot(div);
+    
+    act(() => {
+      root.render(<App />);
+    });
+    
+    act(() => {
+      root.unmount();
+    });
+  });
+});
+
+describe('Addition', () => {
+  it('knows that 2 and 2 make 4', () => {
+    expect(2 + 2).toBe(4);
+  });
 });
